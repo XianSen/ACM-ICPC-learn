@@ -1,0 +1,74 @@
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <algorithm>
+#define SQR(n) ((n)*(n))
+
+using std::min;
+using std::max;
+using std::sort;
+using std::next_permutation;
+
+const int maxn = 10;
+
+int n;
+double ans;
+double r[maxn];
+
+/*计算n的阶乘*/
+int f(int n){
+    if(n == 0) return 1;
+    else return f(n - 1) * n;
+}
+
+/*求两个圆的距离*/
+double dis(double a, double b){
+    return sqrt(SQR(a+b) - SQR(a-b));
+}
+
+/*计算给定序列圆的距离*/
+double calc(double * a , double * b){
+    if(a == b) return 0;
+
+    int nr = b - a;
+    double x[maxn];
+    double cost = 0;
+    
+    for(int i = 0; i < nr; i++){
+	x[i] = a[i];
+	for(int j = 0; j < i; j++)
+	    x[i] = max(x[i], x[j] + dis(a[i], a[j]));
+	cost = max(cost, x[i] + a[i]);
+    }
+    
+    return cost;
+}
+
+int num[maxn];
+double r2[maxn];
+
+int main(){
+    int cas;
+    scanf("%d", &cas);
+    while(cas--){
+	scanf("%d", &n);
+	for(int i = 0; i < n; i++){
+	    num[i] = i;
+	    scanf("%lf", r+i);
+	}
+
+	int nr = f(n);					
+	ans = 1.0e300;
+
+	for(int i = 0; i <= nr; i++){
+	    next_permutation(num, num + n);
+	    for(int i = 0; i < n; i++)
+		r2[i] = r[num[i]];
+	    ans = min(ans, calc(r2, r2 + n));
+	}
+
+	printf("%0.3lf\n", ans);
+    }
+    return 0;
+}
