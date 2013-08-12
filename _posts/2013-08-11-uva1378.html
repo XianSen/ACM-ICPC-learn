@@ -1,23 +1,110 @@
-<!docType html>
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!-- The html is written by XianSen. And use Jon Rohan's css. -->
 <html>
-	<head>
-		<meta charset="utf-8">
-  		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  		<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/stylesheet.css" media="screen"/>
-  		
- 		<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/pygment_trac.css"/>
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/stylesheet.css" media="screen"/>
 
- 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
- 		</script>
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/pygment_trac.css"/>
 
-  		<script type="text/javascript" src="http://xiansen.github.io/ACM-ICPC-learn/javascripts/script.js"></script>
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
-  		<title>Acm-icpc-learn</title>
-		<title>UVa-1378: A Funny Stone Game</title>>
-	<head>
-	<body>
-		<h1>Just for test<h1>
-		<p> This is just for test</p>
-	</body>
+  	<script type="text/javascript" src="http://xiansen.github.io/ACM-ICPC-learn/javascripts/script.js"></script>
+
+  	<title>uva1378: A Funny Stone Game</title>
+  	<meta name="description" content="ACM uva1378 题解">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">A Funny Stone Game</h1>
+    </header>
+
+    <div id="container">
+      	<p class="tagline">
+      		<a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4124"> 
+      		UVA1378题解
+      		</a>
+      	</p>
+      	<div id="main" role="main">
+       	 <div class="download-bar">
+       	    <div class="inner">
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="download-button tar"><span>Downloads</span></a>
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="code">View  on GitHub</a>
+        	</div>
+        	<span class="blc"></span><span class="trc"></span>
+        </div>
+
+        <article class="markdown-body">
+          	<h3>
+				题目大意
+		   	</h3>
+
+			<p>
+				给定n堆石子(编号从0到n-1),两个人轮流做以下的操作,不能操作的人输</br>
+				<ol>
+					<li>选三堆石子,我们设他们的编号分别为i, j, k,(i&lt;j &lt;= k)</li>
+					<li>从第i堆中拿走一个石子,给j和k分别添加1个石子</li>
+				</ol>
+				给定n(n &lt; 24),和各堆石子数量si(si &lt; 1000)的情况下,求先手是否能获胜
+			</p>
+
+
+		<h3>
+			<a name="analysis" class="anchor" href="#analysis"><span class="octicon octicon-link"></span></a>题目分析</h3>
+		<p styple="line-height">
+			实际上我们把题目中的石子看成一堆石子。 具体的说
+			  <ul>
+			 	<li>
+					如果石子在i堆，我们就可以把他看成是有(n - i - 1)的一堆石子。 
+				</li>	
+
+				<li>
+					题目中的操作就转化为,把个数为s的石子转化为更小的两堆石子. 且每堆石子成为了独立的游戏. 
+				</li>	
+				<li>
+					这样一次操作就是把一个规模大的游戏,转化为相互独立的两个规模较小的游戏.
+				</li>
+			  </ul>
+			如果我们用f(n)表示规模为n的石子的sg,那么把n,分解为n1,n2的两堆, 根据<strong>SG定理</strong>,其sg既为 f(n1) xor f(n2) 则f(n)即为</p>
+			<pre><code> f(n) = mex{f(n1) xor f(n2) n1&lt;n,n2&lt;n,n1 +n2=2 }
+			</code></pre>
+		
+
+		<h3>
+			<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+		<p>转载请先阅读<a href="www.baidu.com">声明</a>，
+			并<strong>注明</strong>出处. 任何问题请联系<a href="nothi1992@gmail.com">XianSen</a></p>
+        </article>
+      </div>
+    </div>
+
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/XianSen" class="avatar"><img src="https://secure.gravatar.com/avatar/51346c59edc0a485f5b2c523accc1e79?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/XianSen">XianSen</a> maintains <a href="https://github.com/XianSen/ACM-ICPC-learn">Acm-icpc-learn</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a> </small>
+      </div>
+    </footer>
+  </div>
+
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme" class="tar">tar</a><a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
 </html>
