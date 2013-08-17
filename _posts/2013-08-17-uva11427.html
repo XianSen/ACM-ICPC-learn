@@ -4,6 +4,7 @@
 <!-- The html is written by XianSen. And use Jon Rohan's css. -->
 <html>
 <head>
+  <!-- 不变的部分 -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -15,8 +16,10 @@
 
   	<script type="text/javascript" src="http://xiansen.github.io/ACM-ICPC-learn/javascripts/script.js"></script>
 
-  	<title>uva1378: A Funny Stone Game</title>
-  	<meta name="description" content="ACM uva1378 题解">
+    <!-- 不变的部分 -->
+
+  	<title>uva11427: Expect the Expected</title>
+  	<meta name="description" content="ACM uva11427 题解">
 
 </head>
 
@@ -24,20 +27,19 @@
 
   <div class="wrapper">
     <header>
-      <h1 class="title">A Funny Stone Game</h1>
+      <h1 class="title">Expect the Expected</h1>
     </header>
 
     <div id="container">
       	<p class="tagline">
-      		<a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4124"> 
-      		UVA1378题解
+      		<a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&category=481&problem=2422&mosmsg=Submission+received+with+ID+12213929"> UVA11427题解
       		</a>
       	</p>
       	<div id="main" role="main">
        	 <div class="download-bar">
        	    <div class="inner">
-          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="download-button tar"><span>Downloads</span></a>
-          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="code">View  on GitHub</a>
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-11427.cpp" class="download-button tar"><span>Downloads</span></a>
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-11427.cpp" class="code">View  on GitHub</a>
         	</div>
         	<span class="blc"></span><span class="trc"></span>
         </div>
@@ -47,36 +49,40 @@
 				题目大意
 		   	</h3>
 
-			<p>
-				给定n堆石子(编号从0到n-1),两个人轮流做以下的操作,不能操作的人输</br>
-				<ol>
-					<li>选三堆石子,我们设他们的编号分别为i, j, k,(i&lt;j &lt;= k)</li>
-					<li>从第i堆中拿走一个石子,给j和k分别添加1个石子</li>
-				</ol>
-				给定n(n &lt; 24),和各堆石子数量si(si &lt; 1000)的情况下,求先手是否能获胜
-			</p>
+			<p> 有个喜欢玩纸牌游戏的人，每次玩都有p的概率会胜。对每一天来说：
+            <ol>
+                <li>
+                    如果第一次玩胜了，他今天就不玩了，明天再继续玩.
+                </li>
+
+                <li>
+                   如果第一次玩输了，他就会一直玩。设他总共玩了sum次，其中胜了win次。他会一直玩到win/sum > p。
+                </li>
+            </ol>
+            这里有个限制，即他一天不能玩超过n次(1&lt;=n&lt;=100),如果超过n次，或者 win/sum 不能超过p,则他以后都不会玩这个游戏了。给定a,b(p = a / b) 和 n,求他玩的天数的期望值 </p>
 
 
 		<h3>
 			<a name="analysis" class="anchor" href="#analysis"><span class="octicon octicon-link"></span></a>题目分析</h3>
-		<p styple="line-height">
-			实际上我们把题目中的石子看成一堆石子。 具体的说
-			  <ul>
-			 	<li>
-					如果石子在i堆，我们就可以把他看成是有(n - i - 1)的一堆石子。 
-				</li>	
+      <p>		
+          我们分两步解决这个问题。
+      </p>   
+      <h4>第一步</h4>
+        <p> 我们先计算玩了n次都不能达到要求的概率，即他第二天不会继续玩的概率Q。我们用dp[i][j]表示玩了i次，每一轮后都满足win/sum &lt;=p，且其中恰好j次胜利的概率。则 </p>
 
-				<li>
-					题目中的操作就转化为,把个数为s的石子转化为更小的两堆石子. 且每堆石子成为了独立的游戏. 
-				</li>	
-				<li>
-					这样一次操作就是把一个规模大的游戏,转化为相互独立的两个规模较小的游戏.
-				</li>
-			  </ul>
-			如果我们用f(n)表示规模为n的石子的sg,那么把n,分解为n1,n2的两堆, 根据<strong>SG定理</strong>,其sg既为 f(n1) xor f(n2) 则f(n)即为</p>
-			<pre><code> f(n) = mex{f(n1) xor f(n2) n1&lt;n,n2&lt;n,n1 +n2=n }
-			</code></pre>
-		
+        <pre> <code>dp[i][j] = sum{dp[i-1][j-1] * p, dp[i-1][j]*(1-p), j * p &lt;=i} </code> </pre>
+
+        <p>这样就可以方便地求Q了</p>
+
+        <pre>f(n, p) = min{k | k * n > p};
+Q = sum{dp[i-1][f(i, p)] * p, 1&lt;=i&lt;=n};</pre>
+
+      <h4>第二步</h4>
+      <p> 我们设我们所求的期望为S则：</p>
+      <pre>(1) S = 1 * Q + 2 * Q * (1 - Q)  + 3 * Q * (1 - Q)^2 ...+n * Q * (1 - Q)^(n - 1);
+(2) (1-Q)S = Q*(1-Q) + 2 * Q * (1 - Q)^2 + ... + 
+            (n- 1)*Q * (1 - Q) ^ (n - 1) + n * Q * (1 - Q) ^ n
+(1) - (2)取极限并求简化后可得S = 1 / Q;</pre>
 
 		<h3>
 			<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
