@@ -1,0 +1,126 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!-- The html is written by XianSen. And use Jon Rohan's css. -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/stylesheet.css" media="screen"/>
+
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/pygment_trac.css"/>
+
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+  	<script type="text/javascript" src="http://xiansen.github.io/ACM-ICPC-learn/javascripts/script.js"></script>
+
+  	<title>uva11762: Race to 1</title>
+  	<meta name="description" content="ACM uva11762 题解">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Race to 1</h1>
+    </header>
+
+    <div id="container">
+      	<p class="tagline">
+      		<a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2862"> 
+      		UVA11762题解
+      		</a>
+      	</p>
+      	<div id="main" role="main">
+       	 <div class="download-bar">
+       	    <div class="inner">
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-11762.cpp" class="download-button tar"><span>Downloads</span></a>
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-11762.cpp" class="code">View  on GitHub</a>
+        	</div>
+        	<span class="blc"></span><span class="trc"></span>
+        </div>
+
+        <article class="markdown-body">
+          	<h3>
+				题目大意
+		   	</h3>
+    <p>
+      给定数D(1&lt;=n&lt;=1000000),你每次都有相同的概率选择一个不大于D的素数 p
+        <ol>
+            <li>
+              若p可以整除D,则令 D = D / p                
+            <li>
+            </li>
+              若p不能整除D,则D不变
+            <li>
+            </li>
+        </ol>
+        你一直做这样的操作，直到D = 1。问你，做的操作次数的期望
+    </p>
+		<h3>
+			<a name="analysis" class="anchor" href="#analysis"><span class="octicon octicon-link"></span></a>题目分析</h3>
+
+    <p>
+      我们设f[i]为数字i的做的操作次数 对于每个不大于i的素数p,我们有:
+        <ol>
+          <li>
+            若p | i(p整除i),则 可以增加f[i/p] 
+          </li> 
+
+          <li>
+            若 p 不能整除i,则 可以增加f[i]
+          </li> 
+        </ol>
+    </p>
+
+    <p>
+      我们做如下假设:
+      <ol>
+         <li>
+          设d[i] = sum{f[i/p] | p 整除i}
+         </li>
+         <li>
+          设h[i]为整除i的素数的个数
+         </li>
+         <li>
+            设g[i]为小于或者等于i的素数的个数
+          </li>
+      </ol>
+    </p>
+
+    <p>
+      那么f[i] = (d[i] + (g[i] - h[i]) * f[i]) / g[i];</br>
+      整理得:f[i] = d[i] / h[i];
+    </p>
+		<h3>
+			<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+		<p>转载请先阅读<a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme">声明</a>，
+			并<strong>注明</strong>出处. 有任何问题请联系<a href="nothi1992@gmail.com">XianSen(nothi1992@gmail.com)</a></p>
+        </article>
+      </div>
+    </div>
+
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/XianSen" class="avatar"><img src="https://secure.gravatar.com/avatar/51346c59edc0a485f5b2c523accc1e79?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/XianSen">XianSen</a> maintains <a href="https://github.com/XianSen/ACM-ICPC-learn">Acm-icpc-learn</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a> </small>
+      </div>
+    </footer>
+  </div>
+
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme" class="tar">tar</a><a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
