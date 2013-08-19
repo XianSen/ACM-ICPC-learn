@@ -75,7 +75,7 @@ int main(){
 		    }
 		sum += value;
 	    }
-printf("%lf\n", sum);
+//printf("%lf\n", sum);
 	    printf("Case %d:\n", ++tt);
 	    for(int i = 0; i < n; i++)
 		printf("%0.6lf\n", ans[i] / sum);
