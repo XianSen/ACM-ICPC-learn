@@ -1,0 +1,104 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!-- The html is written by XianSen. And use Jon Rohan's css. -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/stylesheet.css" media="screen"/>
+
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/pygment_trac.css"/>
+
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+  	<script type="text/javascript" src="http://xiansen.github.io/ACM-ICPC-learn/javascripts/script.js"></script>
+
+  	<title>uva557: Burger</title>
+  	<meta name="description" content="ACM uva557 题解">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Burger</h1>
+    </header>
+
+    <div id="container">
+      	<p class="tagline">
+      		<a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=482&page=show_problem&problem=498"> 
+      		UVA557题解
+      		</a>
+      	</p>
+      	<div id="main" role="main">
+       	 <div class="download-bar">
+       	    <div class="inner">
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-557.cpp" class="download-button tar"><span>Downloads</span></a>
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-557.cpp" class="code">View  on GitHub</a>
+        	</div>
+        	<span class="blc"></span><span class="trc"></span>
+        </div>
+
+        <article class="markdown-body">
+          	<h3>
+				题目大意
+		   	</h3>
+
+			<p>
+        有n(2 &l;=n&lt;=100000, n mod 2 = 0)排队吃Burger(夹饼)。共有两种Burger,每个都有n/2种。服务员到每一个有前就掷硬币，随机决定每个人吃哪种。问你，到最后两个人不用掷硬币的概率(即到最后两人的时候只有一种食物)
+			</p>
+
+      <h4>解法一</h4>
+      <p>
+        我们容易想到的时某个人的时候，正好有一种食物没了。我们可以枚举到第i个人的时候，有一种食物没了。则那种情况发生的概率为:c(n/2-1,i-1) */(2 ^ (i - 1)),次方。可以递推计算每个i发生的概率
+      </p>
+      <p>
+        因为我们要枚举i需要O(n)的时间。这题由于数据组数较多，会TLE..
+      </p>
+
+      <h4>解法二</h4>
+      <p>
+        我们换个角度来想这题。由于题目要求的是最后两个人吃的相同的概率。我们不妨先求问题的反而。即最后两个人吃的相同的食物。n-1一个人和n个人不同，则前面要有n/2 - 1的人和最后一个人吃相同的，由此我们可以得到这时的概率为:c(n/2-1, n-2) /(2 ^ (n - 1))。
+      </p>
+
+      <p>
+        我们要怎么在O(1)的时间下求出c(n,k) * (0.5^k)次方呢？我们先把答案求对数，并预处理出阶乘的对数，这样即可以在O(1)时间内得到解。具体实现见<a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-557.cpp">代码</a>.
+      </p>
+		<h3>
+			<a name="analysis" class="anchor" href="#analysis"><span class="octicon octicon-link"></span></a>题目分析</h3>
+		<p styple="line-height">
+		
+
+		<h3>
+			<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+		<p>转载请先阅读<a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme">声明</a>，
+			并<strong>注明</strong>出处. 有任何问题请联系<a href="nothi1992@gmail.com">XianSen(nothi1992@gmail.com)</a></p>
+        </article>
+      </div>
+    </div>
+
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/XianSen" class="avatar"><img src="https://secure.gravatar.com/avatar/51346c59edc0a485f5b2c523accc1e79?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/XianSen">XianSen</a> maintains <a href="https://github.com/XianSen/ACM-ICPC-learn">Acm-icpc-learn</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a> </small>
+      </div>
+    </footer>
+  </div>
+
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme" class="tar">tar</a><a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
