@@ -1,0 +1,109 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!-- The html is written by XianSen. And use Jon Rohan's css. -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <!-- 
+
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/stylesheet.css" media="screen"/>
+
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/pygment_trac.css"/>
+
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+  	<script type="text/javascript" src="http://xiansen.github.io/ACM-ICPC-learn/javascripts/script.js"></script>
+  -->
+
+    <link rel="stylesheet" href="../stylesheets/stylesheet.css" media="screen"/>
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css"/>
+    <script type="text/javascript" src="../javascripts/script.js"></script>
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+  	<title>uva11637: Garbage Remembering Exam</title>
+  	<meta name="description" content="ACM uva11637 题解">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Garbage Remembering Exam</h1>
+    </header>
+
+    <div id="container">
+      	<p class="tagline">
+      		<a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=518&page=show_problem&problem=2684"> 
+      		UVA11637题解
+      		</a>
+      	</p>
+      	<div id="main" role="main">
+       	 <div class="download-bar">
+       	    <div class="inner">
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-11637.cpp" class="download-button tar"><span>Downloads</span></a>
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-11637.cpp" class="code">View  on GitHub</a>
+        	</div>
+        	<span class="blc"></span><span class="trc"></span>
+        </div>
+
+        <article class="markdown-body">
+        <h3>题目大意</h3>
+
+        <p>
+          你按单词表背了n(1&lt;=n&lt;100000)个单词.现在随机排列单词，如果两个单词在原本单词表中和现在的排列中距离都不超过k(1&lt;=k&lt;=n)，那么这两个单词就是没有意义的单词，题目要求你求没有意义的单词的期望。
+        </p>
+        <p><strong>注意<strong>:单词表是循环的(即1和n相差的距离为1),而随机的排列是线性的(1和n的距离是n)</p>
+
+		<h3>
+			<a name="analysis" class="anchor" href="#analysis"><span class="octicon octicon-link"></span></a>题目分析</h3>
+		<p styple="line-height">
+
+      <p>这题可以逆向思维, 我们可以求问题的反面。即平均有多少个有意义的单词</p>
+      <p>我们用dp[i]表示i位置平均有多少个有意义的单词. 因为我们要使单词有意义，所以有随机排列中单词旁k距离内都应该是原本单词表中和本身相距超过k的单词</p>
+      <ol>
+        <li>我们令x为,在随机排列中位于i的单词周围共有x个，和他原本单词表中相差超过k的单词数，则x = min(i - 1, k) + min(n - i, k)</li>
+        <li>令y为，在原本单词表中有单词相差超过k的单词的个数，则y = n - 2 * k - 1</li>
+      </ol>
+      <p>那么我们可以这样求dp[i]</p>
+      <ol>
+        <li>从原本的n个单词选一个当做放在i个故有c(n,1)<li>
+        <li>排列周围的x个单词(即周围x个单词都不能和i在单词表中的距离超过k)有c(y,x) * x!<li>
+        <li>排列剩下的单词(n - x - 1)!</li>
+        <li>总的情况为A(n, n)</li>
+      </ol>
+      <p>所以dp[i] = c(n,1) * c(y,x) * x! * (n - x - 1)!/n!,具体实现见<a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-11637.cpp">代码</a></p>
+
+		<h3>
+			<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+		<p>转载请先阅读<a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme">声明</a>，
+			并<strong>注明</strong>出处. 有任何问题请联系<a href="nothi1992@gmail.com">XianSen(nothi1992@gmail.com)</a></p>
+        </article>
+      </div>
+    </div>
+
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/XianSen" class="avatar"><img src="https://secure.gravatar.com/avatar/51346c59edc0a485f5b2c523accc1e79?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/XianSen">XianSen</a> maintains <a href="https://github.com/XianSen/ACM-ICPC-learn">Acm-icpc-learn</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a> </small>
+      </div>
+    </footer>
+  </div>
+
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme" class="tar">tar</a><a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
