@@ -1,0 +1,152 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!-- The html is written by XianSen. And use Jon Rohan's css. -->
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/stylesheet.css" media="screen"/>
+
+  	<link rel="stylesheet" href="http://xiansen.github.io/ACM-ICPC-learn/stylesheets/pygment_trac.css"/>
+
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+  	<script type="text/javascript" src="http://xiansen.github.io/ACM-ICPC-learn/javascripts/script.js"></script>
+
+  	<title>uva11176: Winning Streak</title>
+  	<meta name="description" content="ACM uva11176 题解">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Winning Streak</h1>
+    </header>
+
+    <div id="container">
+      	<p class="tagline">
+      		<a href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=518&page=show_problem&problem=2117"> 
+      		UVA11176题解
+      		</a>
+      	</p>
+      	<div id="main" role="main">
+       	 <div class="download-bar">
+       	    <div class="inner">
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-11176.cpp" class="download-button tar"><span>Downloads</span></a>
+          <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-11176.cpp" class="code">View  on GitHub</a>
+        	</div>
+        	<span class="blc"></span><span class="trc"></span>
+        </div>
+
+        <article class="markdown-body">
+        <h3>
+				题目大意
+		   	</h3>
+        <p>你在玩游戏，游戏有很多轮，每一轮的获胜的概率固定为p,求玩n(1&lt;=n&lt;=500)轮, 你最大连胜次数的平均值</p>
+        <p>比如，你玩3轮，胜率p = 0.4,则有下表(L代表败, w代表胜)</p>
+        <table>
+            <tr>
+                <td>结果</td>
+                <td>概率</td>
+                <td>最大连胜次数</td>
+            </tr>
+            <tr>
+                <td>LLL</td>
+                <td>0.216</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>LLW</td>
+                <td>0.144</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>LWL</td>
+                <td>0.144</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>LWW</td>
+                <td>0.096</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>WLL</td>
+                <td>0.144</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>WLW</td>
+                <td>0.096</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>WWL</td>
+                <td>0.096</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>WWW</td>
+                <td>0.064</td>
+                <td>3</td>
+            </tr>
+        </table>
+        <p>所以期望为:0.216·0 + 0.144·1 + 0.144·1 + 0.096·2 + 0.144·1 + 0.096·1 + 0.096·2 + 0.064·3 = 1.104</p>
+
+		<h3>
+			<a name="analysis" class="anchor" href="#analysis"><span class="octicon octicon-link"></span></a>题目分析</h3>
+		
+    <p>这是一道动态规划的题目</p>
+    <p>我们用f[i][j]表式,玩i次，每次最大的连胜次数不大于j的概率。</p>
+    <ol>
+      <li>题目求的即sum{(dp[n][i] - dp[n][i-1]) * i, 1 &lt;=i&lt;=n}</li>
+      <li>
+        在添加一回合后，只有在最近都连胜，且正好为j次时，会增加连胜的次数。那么我们可以令dp[i][j] = dp[i - 1][j] - win
+      </li>
+      <li>
+         win我们可以分三种总情况求
+         <ol>
+            <li>如果场次少于j+1次,是不可能有j+1连胜的，因此i &lt; j + 1时，win = 0</li>
+            <li>从一开始胜到现在，则i == j + 1,win = p^i</li>
+            <li>
+              如果不是从一开始，胜到现在，则在j场胜利前必有一次败且i > j+1,win = (1 - p)  * p^(j + 1) * dp[i - j - 2][j];
+            </li>
+         </ol>
+      </li>
+    </ol>
+    <p>到此，问题解决。具体实现见<a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/Probability/u-11176.cpp">代码</a></p>
+
+		<h3>
+			<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+		<p>转载请先阅读<a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme">声明</a>，
+			并<strong>注明</strong>出处. 有任何问题请联系<a href="nothi1992@gmail.com">XianSen(nothi1992@gmail.com)</a></p>
+        </article>
+      </div>
+    </div>
+
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/XianSen" class="avatar"><img src="https://secure.gravatar.com/avatar/51346c59edc0a485f5b2c523accc1e79?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/XianSen">XianSen</a> maintains <a href="https://github.com/XianSen/ACM-ICPC-learn">Acm-icpc-learn</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a> </small>
+      </div>
+    </footer>
+  </div>
+
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/readme" class="tar">tar</a><a href="https://github.com/XianSen/ACM-ICPC-learn/blob/gh-pages/src/UVa/chapter2/GameTheory/Intermediate/u-1378.cpp" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
